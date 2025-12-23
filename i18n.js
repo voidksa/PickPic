@@ -839,6 +839,34 @@
 
       btnContainer.appendChild(btn);
 
+      const copyBtn = document.createElement("button");
+      copyBtn.type = "button";
+      copyBtn.textContent = t(lang, "copyUrl");
+      copyBtn.setAttribute("data-i18n", "copyUrl");
+      copyBtn.style.fontSize = "12px";
+      copyBtn.style.background = "#6b7280";
+      copyBtn.style.color = "#fff";
+      copyBtn.style.border = "none";
+      copyBtn.style.borderRadius = "4px";
+      copyBtn.style.padding = "4px 8px";
+      copyBtn.style.cursor = "pointer";
+      copyBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const prev = copyBtn.textContent;
+        try {
+          await navigator.clipboard.writeText(img.src);
+          copyBtn.textContent = t(lang, "ok");
+        } catch {
+          copyBtn.textContent = prev;
+        } finally {
+          setTimeout(() => {
+            copyBtn.textContent = prev;
+          }, 1000);
+        }
+      });
+      btnContainer.appendChild(copyBtn);
+
       // 2. JPG Button (Auto Convert)
       const jpgBtn = document.createElement("button");
       jpgBtn.type = "button";
@@ -1007,6 +1035,9 @@
         // Also re-render preview buttons text
         document.querySelectorAll('[data-i18n="preview"]').forEach(el => {
           el.textContent = t(newLang, "preview");
+        });
+        document.querySelectorAll('[data-i18n="copyUrl"]').forEach(el => {
+          el.textContent = t(newLang, "copyUrl");
         });
         document.querySelectorAll('[data-i18n="convertToJpg"]').forEach(el => {
           el.textContent = t(newLang, "convertToJpg");
