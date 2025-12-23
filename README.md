@@ -1,71 +1,74 @@
-# PickPic - Enhanced Edition (v1.1.0)
+# PickPic - الإصدار المحسن (v1.1.0)
 
-> **Note:** This repository contains the **compiled/distribution version** of the PickPic extension, enhanced with Arabic support and AI-improved translations.
+> [!NOTE]
+> 🇺🇸 **[English](README.en.md)** | 🇨🇳 **[中文 (Chinese)](README.zh.md)**
 
-One-click downloader for images and videos from any webpage, with enhanced support for WeChat Official Account articles.
+> **ملاحظة:** يحتوي هذا المستودع على **النسخة المجمعة/النهائية (Compiled/Distribution)** من إضافة PickPic، والتي تم تحسينها بإضافة دعم اللغة العربية وتحسين الترجمات باستخدام الذكاء الاصطناعي.
 
-## 🚀 New Features in This Version (v1.1.0)
+أداة تحميل بنقرة واحدة للصور والفيديوهات من أي صفحة ويب، مع دعم محسن لمقالات حسابات WeChat الرسمية.
 
-### 🌍 **Localization Support**
-- **Arabic Language (العربية):** Added full support for Arabic, including RTL (Right-to-Left) layout adjustments (feature not present in the original version).
-- **Enhanced Chinese:** Updated and refined Chinese translations using AI.
-- **Expanded Language Switcher:** Redesigned the language toggle to support a multi-language menu (Ar/En/Zh), replacing the original English/Chinese-only switch.
-- **Improved i18n System:** 
-  - Real-time language switching without page refresh.
-  - Text replacement logic optimized for performance.
+## 🚀 الميزات الجديدة في هذا الإصدار (v1.1.0)
 
-### 🛠 **UI & Functionality**
-- **New Feature: Smart Size Filter:** Automatically filters out small images (icons, tracking pixels) to keep the list clean. Toggleable via a floating button.
-- **New Feature: Auto Convert WEBP to JPG/PNG:** Added one-click buttons to convert and download WEBP images as standard JPG or PNG files.
-- **New Feature: Copy Image URL:** Added a quick button to copy the image link to your clipboard for easy sharing and usage.
-- **New Feature: Smart Preview:** Added a brand new image preview modal allowing users to view images directly on the page without opening new tabs (this feature was developed specifically for this edition).
-- **Privacy & About:** Native, translated pages integrated directly into the extension.
-- **Bug Fixes:** Resolved issues with the refresh button and text persistence.
+### 🌍 **دعم التوطين واللغات**
+- **اللغة العربية (Arabic):** إضافة دعم كامل للغة العربية، بما في ذلك ضبط الاتجاه من اليمين لليسار (RTL) (ميزة غير موجودة في الإصدار الأصلي).
+- **تحسين الصينية:** تحديث وتنقيح الترجمات الصينية باستخدام الذكاء الاصطناعي.
+- **مبدل لغات موسع:** إعادة تصميم مبدل اللغة ليدعم قائمة متعددة اللغات (عربي/إنجليزي/صيني)، بدلاً من التبديل الثنائي الأصلي.
+- **نظام i18n مطور:** 
+  - تبديل اللغة في الوقت الفعلي دون الحاجة لتحديث الصفحة.
+  - تحسين منطق استبدال النصوص للأداء العالي.
+
+### 🛠 **واجهة المستخدم والوظائف**
+- **ميزة جديدة: تصفية ذكية للحجم (Smart Size Filter):** تصفية تلقائية للصور الصغيرة (الأيقونات، بكسلات التتبع) للحفاظ على نظافة القائمة. يمكن تفعيلها عبر زر عائم.
+- **ميزة جديدة: تحويل تلقائي من WEBP إلى JPG/PNG:** إضافة أزرار بنقرة واحدة لتحويل وتنزيل صور WEBP كملفات JPG أو PNG قياسية.
+- **ميزة جديدة: نسخ رابط الصورة (Copy Image URL):** إضافة زر سريع لنسخ رابط الصورة إلى الحافظة لمشاركته واستخدامه بسهولة.
+- **ميزة جديدة: معاينة ذكية (Smart Preview):** إضافة نافذة معاينة صور جديدة كلياً تتيح للمستخدمين عرض الصور مباشرة على الصفحة دون فتح علامات تبويب جديدة (تم تطوير هذه الميزة خصيصاً لهذا الإصدار).
+- **الخصوصية وحول:** صفحات أصلية ومترجمة مدمجة مباشرة في الإضافة.
+- **إصلاحات الأخطاء:** حل مشاكل زر التحديث وثبات النصوص.
 
 ---
 
-## 📦 Installation
+## 📦 التثبيت
 
-Since this repository contains the **unpacked extension**, you can install it directly into Chrome/Edge without building it.
+بما أن هذا المستودع يحتوي على **الإضافة غير المضغوطة (Unpacked)**، يمكنك تثبيتها مباشرة في Chrome/Edge دون الحاجة لبنائها برمجياً.
 
-1. **Download/Clone this repository:**
+1. **حمل/انسخ هذا المستودع:**
    ```bash
    git clone https://github.com/voidksa/PickPic.git
    ```
-2. Open your browser (Chrome or Edge).
-3. Navigate to `chrome://extensions/`.
-4. Enable **Developer mode** (toggle switch in the top right corner).
-5. Click the **Load unpacked** button.
-6. Select the folder where you cloned/downloaded this repository (e.g., `PickPic`).
+2. افتح متصفحك (Chrome أو Edge).
+3. اذهب إلى `chrome://extensions/`.
+4. فعل **وضع المطور (Developer mode)** (الزر في الزاوية العلوية).
+5. اضغط على زر **Load unpacked**.
+6. اختر المجلد الذي قمت بتحميله (مثلاً `PickPic`).
 
-✅ The extension is now installed and ready to use!
-
----
-
-## ✨ Key Features
-
-- **Universal Support:** Extract images and videos from **any webpage**.
-- **WeChat Enhanced:** Specialized extraction for WeChat Official Account articles (Title, Author, Smart Filtering).
-- **Flexible Downloads:**
-  - Single click download.
-  - Batch download (packaged as ZIP).
-- **Media Support:** Handles both Images and Videos.
-- **Privacy Focused:** No data collection; all processing happens locally.
-
-## 🔒 Privacy & Permissions
-
-- **activeTab:** To analyze the current page for media.
-- **storage:** To save your language and settings preferences.
-- **downloads:** To save files to your computer.
-- **<all_urls>:** To enable the extraction button on any site you visit.
-
-> **Privacy Policy:** This extension does not collect, store, or transmit any personal data.
+✅ الإضافة الآن مثبتة وجاهزة للاستخدام!
 
 ---
 
-## 📝 Credits
+## ✨ الميزات الرئيسية
 
-- **Original Project:** [PickPic](https://github.com/yaolifeng0629/PickPic) by [@yaolifeng0629](https://github.com/yaolifeng0629)
-- **Enhanced Version:** maintained by [@voidksa](https://github.com/voidksa)
+- **دعم شامل:** استخراج الصور والفيديوهات من **أي صفحة ويب**.
+- **تحسين WeChat:** استخراج متخصص لمقالات حسابات WeChat الرسمية (العنوان، المؤلف، تصفية ذكية).
+- **تنزيل مرن:**
+  - تنزيل بنقرة واحدة.
+  - تنزيل جماعي (مضغوط في ملف ZIP).
+- **دعم الوسائط:** يتعامل مع كل من الصور والفيديوهات.
+- **الخصوصية أولاً:** لا يتم جمع أي بيانات؛ جميع العمليات تتم محلياً.
 
-**Disclaimer:** The Chinese translations in this version were enhanced using AI models. If you notice any inaccuracies, please feel free to contribute by editing `i18n.js`.
+## 🔒 الخصوصية والأذونات
+
+- **activeTab:** لتحليل الصفحة الحالية بحثاً عن الوسائط.
+- **storage:** لحفظ تفضيلات اللغة والإعدادات.
+- **downloads:** لحفظ الملفات على جهاز الكمبيوتر الخاص بك.
+- **<all_urls>:** لتمكين زر الاستخراج على أي موقع تزوره.
+
+> **سياسة الخصوصية:** هذه الإضافة لا تجمع أو تخزن أو تنقل أي بيانات شخصية.
+
+---
+
+## 📝 الحقوق والاعتمادات
+
+- **المشروع الأصلي:** [PickPic](https://github.com/yaolifeng0629/PickPic) بواسطة [@yaolifeng0629](https://github.com/yaolifeng0629)
+- **الإصدار المحسن:** يتم صيانته بواسطة [@voidksa](https://github.com/voidksa)
+
+**إخلاء مسؤولية:** تم تحسين الترجمات الصينية في هذا الإصدار باستخدام نماذج الذكاء الاصطناعي. إذا لاحظت أي أخطاء، لا تتردد في المساهمة بتعديل `i18n.js`.
