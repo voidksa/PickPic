@@ -1,5 +1,7 @@
 # PickPic - 增强版 (v1.1.0)
 
+[![Download PickPic Extension](https://img.shields.io/badge/Download-PickPic%20Extension%20(ZIP)-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](releases/PickPic-Extension-v1.1.0.zip)
+
 > [!NOTE]
 > 🇸🇦 **[العربية (Arabic)](README.md)** | 🇺🇸 **[English](README.en.md)**
 
@@ -69,6 +71,7 @@
 ## 📝 致谢
 
 - **原项目:** [PickPic](https://github.com/yaolifeng0629/PickPic) 由 [@yaolifeng0629](https://github.com/yaolifeng0629) 开发
+- **Chrome 应用商店原版扩展:** [Chrome Web Store](https://chromewebstore.google.com/detail/pickpic-one-click-downloa/hfdohacifjijbgobekodafjpjghflemh)
 - **增强版:** 由 [@voidksa](https://github.com/voidksa) 维护
 
 **免责声明:** 本版本中的中文翻译已使用 AI 模型进行了增强。如果您发现任何不准确之处，欢迎通过编辑 `i18n.js` 进行贡献。

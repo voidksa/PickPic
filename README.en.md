@@ -1,5 +1,7 @@
 # PickPic - Enhanced Edition (v1.1.0)
 
+[![Download PickPic Extension](https://img.shields.io/badge/Download-PickPic%20Extension%20(ZIP)-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](releases/PickPic-Extension-v1.1.0.zip)
+
 > [!NOTE]
 > 🇸🇦 **[العربية (Arabic)](README.md)** | 🇨🇳 **[中文 (Chinese)](README.zh.md)**
 
@@ -69,6 +71,7 @@ Since this repository contains the **unpacked extension**, you can install it di
 ## 📝 Credits
 
 - **Original Project:** [PickPic](https://github.com/yaolifeng0629/PickPic) by [@yaolifeng0629](https://github.com/yaolifeng0629)
+- **Original Extension on Chrome Web Store:** [Chrome Web Store](https://chromewebstore.google.com/detail/pickpic-one-click-downloa/hfdohacifjijbgobekodafjpjghflemh)
 - **Enhanced Version:** maintained by [@voidksa](https://github.com/voidksa)
 
 **Disclaimer:** The Chinese translations in this version were enhanced using AI models. If you notice any inaccuracies, please feel free to contribute by editing `i18n.js`.

@@ -1,5 +1,7 @@
 # PickPic - الإصدار المحسن (v1.1.0)
 
+[![Download PickPic Extension](https://img.shields.io/badge/Download-PickPic%20Extension%20(ZIP)-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](releases/PickPic-Extension-v1.1.0.zip)
+
 > [!NOTE]
 > 🇺🇸 **[English](README.en.md)** | 🇨🇳 **[中文 (Chinese)](README.zh.md)**
 
@@ -69,6 +71,7 @@
 ## 📝 الحقوق والاعتمادات
 
 - **المشروع الأصلي:** [PickPic](https://github.com/yaolifeng0629/PickPic) بواسطة [@yaolifeng0629](https://github.com/yaolifeng0629)
+- **رابط الإضافة الأصلية على متجر كروم:** [Chrome Web Store](https://chromewebstore.google.com/detail/pickpic-one-click-downloa/hfdohacifjijbgobekodafjpjghflemh)
 - **الإصدار المحسن:** يتم صيانته بواسطة [@voidksa](https://github.com/voidksa)
 
 **إخلاء مسؤولية:** تم تحسين الترجمات الصينية في هذا الإصدار باستخدام نماذج الذكاء الاصطناعي. إذا لاحظت أي أخطاء، لا تتردد في المساهمة بتعديل `i18n.js`.
