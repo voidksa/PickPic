@@ -737,6 +737,7 @@
       // Container for buttons
       const btnContainer = document.createElement("div");
       btnContainer.style.display = "flex";
+      btnContainer.style.flexWrap = "wrap";
       btnContainer.style.gap = "8px";
       btnContainer.style.marginTop = "4px";
       btnContainer.style.marginBottom = "12px";
