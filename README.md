@@ -15,6 +15,8 @@ One-click downloader for images and videos from any webpage, with enhanced suppo
   - Text replacement logic optimized for performance.
 
 ### 🛠 **UI & Functionality**
+- **New Feature: Smart Size Filter:** Automatically filters out small images (icons, tracking pixels) to keep the list clean. Toggleable via a floating button.
+- **New Feature: Auto Convert WEBP to JPG:** Added a one-click button to convert and download WEBP images as standard JPG files.
 - **New Feature: Smart Preview:** Added a brand new image preview modal allowing users to view images directly on the page without opening new tabs (this feature was developed specifically for this edition).
 - **Privacy & About:** Native, translated pages integrated directly into the extension.
 - **Bug Fixes:** Resolved issues with the refresh button and text persistence.

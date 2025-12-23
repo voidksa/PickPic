@@ -39,6 +39,9 @@
     pause: { en: "Pause", zh: "暂停", ar: "إيقاف مؤقت", variants: ["Pause", "暂停", "إيقاف مؤقت"] },
     resume: { en: "Resume", zh: "继续", ar: "استئناف", variants: ["Resume", "继续", "استئناف"] },
     openInNewTab: { en: "Open in new tab", zh: "在新标签页打开", ar: "فتح في تبويب جديد", variants: ["Open in new tab", "在新标签页打开", "فتح في تبويب جديد", "Open In New Tab"] },
+    convertToJpg: { en: "JPG", zh: "JPG", ar: "JPG", variants: ["Convert to JPG", "转为 JPG", "تحويل لـ JPG"] },
+    convertToPng: { en: "PNG", zh: "PNG", ar: "PNG", variants: ["Convert to PNG", "转为 PNG", "تحويل لـ PNG"] },
+    converting: { en: "Converting...", zh: "转换中...", ar: "جارٍ التحويل...", variants: ["Converting...", "转换中...", "جارٍ التحويل..."] },
 
     // Content
     noArticle: { en: "No Article", zh: "未找到文章", ar: "لا يوجد مقال", variants: ["No Article", "未找到文章", "لا يوجد مقال"] },
@@ -76,6 +79,8 @@
     sort: { en: "Sort", zh: "排序", ar: "ترتيب", variants: ["Sort", "排序", "ترتيب"] },
     sortAsc: { en: "Sort Ascending", zh: "升序", ar: "تصاعدي", variants: ["Sort Ascending", "升序", "تصاعدي"] },
     sortDesc: { en: "Sort Descending", zh: "降序", ar: "تنازلي", variants: ["Sort Descending", "降序", "تنازلي"] },
+    smartFilter: { en: "Smart Filter", zh: "智能过滤", ar: "تصفية ذكية", variants: ["Smart Filter", "智能过滤", "تصفية ذكية"] },
+    hideSmall: { en: "Hide Small Images", zh: "隐藏小图", ar: "إخفاء الصور الصغيرة", variants: ["Hide Small Images", "隐藏小图", "إخفاء الصور الصغيرة"] },
 
     // Languages
     english: { en: "English", zh: "英文", ar: "الإنجليزية", variants: ["English", "英文", "الإنجليزية"] },
@@ -191,7 +196,7 @@
     // About Content
     aboutPickPic: { en: "About PickPic", zh: "关于 PickPic", ar: "حول PickPic", variants: ["About PickPic", "关于 PickPic", "حول PickPic"] },
     copyright: { en: "© 2025 All rights reserved", zh: "© 2025 版权所有", ar: "© 2025 جميع الحقوق محفوظة", variants: ["© 2025 All rights reserved", "© 2025 版权所有", "© 2025 جميع الحقوق محفوظة"] },
-  versionNum: { en: "v1.1.0", zh: "v1.1.0", ar: "v1.1.0", variants: ["v1.0.0", "v1.0.2", "v1.1.0"] },
+    versionNum: { en: "v1.1.0", zh: "v1.1.0", ar: "v1.1.0", variants: ["v1.0.0", "v1.0.2", "v1.1.0"] },
 
     // App Specific
     appTitle: {
@@ -592,26 +597,131 @@
     // Helper to check if an element is the refresh button
     const isRefreshBtn = (el) => {
       const txt = (el.innerText || el.textContent || "").trim().toLowerCase();
-      return txt === refreshText;
+      const title = (el.getAttribute("title") || "").toLowerCase();
+      const aria = (el.getAttribute("aria-label") || "").toLowerCase();
+
+      const target = refreshText;
+
+      // Check text/title/aria against translated or English "refresh"
+      if (txt === target || title === target || aria === target) return true;
+      if (txt === "refresh" || title === "refresh" || aria === "refresh") return true;
+
+      // Check for Lucide icon class
+      if (el.querySelector(".lucide-refresh-cw")) return true;
+
+      return false;
     };
 
     // Find all potential buttons
-    const candidates = document.querySelectorAll('button, [role="button"], .btn');
+    const candidates = document.querySelectorAll('button, [role="button"], .btn, .icon-button');
     candidates.forEach(btn => {
       if (isRefreshBtn(btn)) {
+        // Always ensure title is set for accessibility/hover
+        if (!btn.getAttribute("title")) {
+          btn.setAttribute("title", concepts.refresh[lang] || concepts.refresh.en);
+        }
+
         if (btn.getAttribute("data-refresh-fixed")) return;
 
         btn.setAttribute("data-refresh-fixed", "1");
-        btn.addEventListener("click", (e) => {
+
+        // Remove existing clones to prevent duplicates if we run this multiple times
+        // (Actually we can't easily remove event listeners, but we can clone and replace to strip them)
+        // detailed fix: clone node to strip old listeners, then add ours.
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+
+        newBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+
           // Reload the active tab in the current window
           chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             if (tabs && tabs[0]) {
               chrome.tabs.reload(tabs[0].id);
+              // Close window if it's a popup? No, sidepanel stays open.
             }
           });
-        });
+        }, { capture: true });
       }
     });
+  }
+
+  function initSmartFilter(lang) {
+    // Check if already initialized
+    if (document.getElementById("pickpic-smart-filter-toggle")) return;
+
+    const container = document.getElementById(rootId) || document.body;
+
+    // Create Toggle Button
+    const toggleBtn = document.createElement("button");
+    toggleBtn.id = "pickpic-smart-filter-toggle";
+    toggleBtn.textContent = t(lang, "smartFilter") + ": OFF";
+    toggleBtn.style.position = "fixed";
+    toggleBtn.style.bottom = "16px";
+    toggleBtn.style.right = "16px";
+    toggleBtn.style.zIndex = "2147483640";
+    toggleBtn.style.padding = "8px 12px";
+    toggleBtn.style.background = "#374151";
+    toggleBtn.style.color = "#fff";
+    toggleBtn.style.border = "1px solid #4b5563";
+    toggleBtn.style.borderRadius = "20px";
+    toggleBtn.style.cursor = "pointer";
+    toggleBtn.style.fontSize = "12px";
+    toggleBtn.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+    toggleBtn.style.fontWeight = "bold";
+
+    let isActive = false;
+
+    toggleBtn.addEventListener("click", () => {
+      isActive = !isActive;
+      toggleBtn.textContent = t(lang, "smartFilter") + ": " + (isActive ? "ON" : "OFF");
+      toggleBtn.style.background = isActive ? "#10b981" : "#374151";
+      applyFilter();
+    });
+
+    document.body.appendChild(toggleBtn);
+
+    const applyFilter = () => {
+      const images = document.querySelectorAll("img");
+      images.forEach(img => {
+        // Skip preview images in modal
+        if (img.closest("#pickpic-preview-modal")) return;
+
+        if (!isActive) {
+          img.style.display = "";
+          if (img.parentElement) img.parentElement.style.display = "";
+          return;
+        }
+
+        // Filter logic: < 100px width or height
+        if (img.naturalWidth < 100 || img.naturalHeight < 100) {
+          // Hide the image container if possible, or just the image
+          // Usually images are in a card or list item.
+          // Let's try to find the closest list item or card
+          const card = img.closest(".image-card") || img.closest("li") || img.closest(".item");
+          if (card) {
+            card.style.display = "none";
+          } else {
+            img.style.display = "none";
+          }
+        } else {
+          const card = img.closest(".image-card") || img.closest("li") || img.closest(".item");
+          if (card) {
+            card.style.display = "";
+          } else {
+            img.style.display = "";
+          }
+        }
+      });
+    };
+
+    // Re-apply on mutations if active
+    const observer = new MutationObserver(() => {
+      if (isActive) applyFilter();
+    });
+    observer.observe(container, { childList: true, subtree: true });
   }
 
   function addPreviewButtons(lang) {
@@ -624,15 +734,20 @@
       if (!img || !img.src) return;
       if (img.getAttribute("data-has-preview-btn")) return;
 
+      // Container for buttons
+      const btnContainer = document.createElement("div");
+      btnContainer.style.display = "flex";
+      btnContainer.style.gap = "8px";
+      btnContainer.style.marginTop = "4px";
+      btnContainer.style.marginBottom = "12px";
+
+      // 1. Preview Button
       const btn = document.createElement("button");
       btn.type = "button";
       btn.textContent = t(lang, "preview");
       btn.setAttribute("data-i18n", "preview");
 
-      // Styling to put it below image
-      btn.style.display = "block";
-      btn.style.marginTop = "4px";
-      btn.style.marginBottom = "12px";
+      // Styling
       btn.style.fontSize = "12px";
       btn.style.background = "#3b82f6"; // Blue
       btn.style.color = "#fff";
@@ -640,7 +755,6 @@
       btn.style.borderRadius = "4px";
       btn.style.padding = "4px 8px";
       btn.style.cursor = "pointer";
-      btn.style.width = "fit-content";
 
       btn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -722,8 +836,121 @@
         modal.style.display = "flex";
       });
 
+      btnContainer.appendChild(btn);
+
+      // 2. JPG Button (Auto Convert)
+      const jpgBtn = document.createElement("button");
+      jpgBtn.type = "button";
+      jpgBtn.textContent = t(lang, "convertToJpg");
+      jpgBtn.setAttribute("data-i18n", "convertToJpg");
+      jpgBtn.style.fontSize = "12px";
+      jpgBtn.style.background = "#10b981"; // Green
+      jpgBtn.style.color = "#fff";
+      jpgBtn.style.border = "none";
+      jpgBtn.style.borderRadius = "4px";
+      jpgBtn.style.padding = "4px 8px";
+      jpgBtn.style.cursor = "pointer";
+
+      jpgBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const originalText = jpgBtn.textContent;
+        jpgBtn.textContent = t(lang, "converting");
+        jpgBtn.disabled = true;
+
+        try {
+          // Create a canvas to convert
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          const response = await fetch(img.src);
+          const blob = await response.blob();
+          const bitmap = await createImageBitmap(blob);
+
+          canvas.width = bitmap.width;
+          canvas.height = bitmap.height;
+          ctx.drawImage(bitmap, 0, 0);
+
+          const jpgUrl = canvas.toDataURL("image/jpeg", 0.9);
+
+          // Trigger download
+          const a = document.createElement("a");
+          a.href = jpgUrl;
+          // Generate filename
+          const originalName = img.src.split("/").pop().split("?")[0] || "image";
+          const nameWithoutExt = originalName.replace(/\.[^/.]+$/, "");
+          a.download = `${nameWithoutExt}.jpg`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        } catch (err) {
+          console.error("Conversion failed:", err);
+          alert(t(lang, "error"));
+        } finally {
+          jpgBtn.textContent = originalText;
+          jpgBtn.disabled = false;
+        }
+      });
+
+      btnContainer.appendChild(jpgBtn);
+
+      // 3. PNG Button (Auto Convert)
+      const pngBtn = document.createElement("button");
+      pngBtn.type = "button";
+      pngBtn.textContent = t(lang, "convertToPng");
+      pngBtn.setAttribute("data-i18n", "convertToPng");
+      pngBtn.style.fontSize = "12px";
+      pngBtn.style.background = "#8b5cf6"; // Purple
+      pngBtn.style.color = "#fff";
+      pngBtn.style.border = "none";
+      pngBtn.style.borderRadius = "4px";
+      pngBtn.style.padding = "4px 8px";
+      pngBtn.style.cursor = "pointer";
+
+      pngBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const originalText = pngBtn.textContent;
+        pngBtn.textContent = t(lang, "converting");
+        pngBtn.disabled = true;
+
+        try {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          const response = await fetch(img.src);
+          const blob = await response.blob();
+          const bitmap = await createImageBitmap(blob);
+
+          canvas.width = bitmap.width;
+          canvas.height = bitmap.height;
+          ctx.drawImage(bitmap, 0, 0);
+
+          const pngUrl = canvas.toDataURL("image/png");
+
+          const a = document.createElement("a");
+          a.href = pngUrl;
+          const originalName = img.src.split("/").pop().split("?")[0] || "image";
+          const nameWithoutExt = originalName.replace(/\.[^/.]+$/, "");
+          a.download = `${nameWithoutExt}.png`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        } catch (err) {
+          console.error("Conversion failed:", err);
+          alert(t(lang, "error"));
+        } finally {
+          pngBtn.textContent = originalText;
+          pngBtn.disabled = false;
+        }
+      });
+
+      btnContainer.appendChild(pngBtn);
+
       // Insert after image
-      img.insertAdjacentElement("afterend", btn);
+      img.insertAdjacentElement("afterend", btnContainer);
       img.setAttribute("data-has-preview-btn", "1");
     };
 
@@ -750,6 +977,7 @@
     // Initial Application
     attachLanguageMenu(lang);
     applyTranslations(lang);
+    initSmartFilter(lang);
     addPreviewButtons(lang);
     fixRefreshButton(lang);
     updateContextMenuLanguage(lang);
@@ -779,6 +1007,19 @@
         document.querySelectorAll('[data-i18n="preview"]').forEach(el => {
           el.textContent = t(newLang, "preview");
         });
+        document.querySelectorAll('[data-i18n="convertToJpg"]').forEach(el => {
+          el.textContent = t(newLang, "convertToJpg");
+        });
+        document.querySelectorAll('[data-i18n="convertToPng"]').forEach(el => {
+          el.textContent = t(newLang, "convertToPng");
+        });
+
+        // Update Smart Filter Text
+        const sfBtn = document.getElementById("pickpic-smart-filter-toggle");
+        if (sfBtn) {
+          const isActive = sfBtn.style.background !== "rgb(55, 65, 81)" && sfBtn.style.background !== "#374151"; // Check if active
+          sfBtn.textContent = t(newLang, "smartFilter") + ": " + (isActive ? "ON" : "OFF");
+        }
       }
     });
 
