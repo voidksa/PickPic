@@ -1,0 +1,54 @@
+{
+    "icons": {
+        "16": "icon16.a9258180.png",
+        "32": "icon32.e58af873.png",
+        "48": "icon48.d94b18fc.png",
+        "128": "icon128.ee117443.png"
+    },
+    "manifest_version": 3,
+    "action": {
+        "default_title": "PickPic: One-click downloader for images and videos from any webpage"
+    },
+    "version": "1.1.0",
+    "author": "dev@yaolifeng.com",
+    "name": "PickPic: One-click downloader for images and videos from any webpage",
+    "description": "One-click downloader for images and videos from any webpage",
+    "background": {
+        "service_worker": "static/background/sw.js"
+    },
+    "side_panel": {
+        "default_path": "sidepanel.html"
+    },
+    "permissions": [
+        "sidePanel",
+        "activeTab",
+        "storage",
+        "downloads",
+        "contextMenus"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "extractor.77258ed6.js"
+            ],
+            "run_at": "document_end",
+            "css": []
+        }
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "assets/*.{png,webp,gif,svg}"
+            ],
+            "matches": [
+                "https://www.plasmo.com/*"
+            ]
+        }
+    ]
+}
