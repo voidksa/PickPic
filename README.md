@@ -7,14 +7,15 @@ One-click downloader for images and videos from any webpage, with enhanced suppo
 ## 🚀 New Features in This Version (v1.1.0)
 
 ### 🌍 **Localization Support**
-- **Arabic Language (العربية):** Full RTL (Right-to-Left) support and complete interface translation.
+- **Arabic Language (العربية):** Added full support for Arabic, including RTL (Right-to-Left) layout adjustments (feature not present in the original version).
 - **Enhanced Chinese:** Updated and refined Chinese translations using AI.
+- **Expanded Language Switcher:** Redesigned the language toggle to support a multi-language menu (Ar/En/Zh), replacing the original English/Chinese-only switch.
 - **Improved i18n System:** 
   - Real-time language switching without page refresh.
   - Text replacement logic optimized for performance.
 
 ### 🛠 **UI & Functionality**
-- **Smart Preview:** Images now open in a modal popup within the page instead of a new tab.
+- **New Feature: Smart Preview:** Added a brand new image preview modal allowing users to view images directly on the page without opening new tabs (this feature was developed specifically for this edition).
 - **Privacy & About:** Native, translated pages integrated directly into the extension.
 - **Bug Fixes:** Resolved issues with the refresh button and text persistence.
 
