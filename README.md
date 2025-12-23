@@ -1,130 +1,67 @@
-# PickPic - Enhanced Edition
+# PickPic - Enhanced Edition (v1.1.0)
 
-> **Note:** This is an enhanced fork of the original open-source [PickPic](https://github.com/yaolifeng0629/PickPic) project.
+> **Note:** This repository contains the **compiled/distribution version** of the PickPic extension, enhanced with Arabic support and AI-improved translations.
 
 One-click downloader for images and videos from any webpage, with enhanced support for WeChat Official Account articles.
 
-## 🚀 New Features & Changes in this Version
+## 🚀 New Features in This Version (v1.1.0)
 
-This version includes significant improvements and localizations over the original release:
+### 🌍 **Localization Support**
+- **Arabic Language (العربية):** Full RTL (Right-to-Left) support and complete interface translation.
+- **Enhanced Chinese:** Updated and refined Chinese translations using AI.
+- **Improved i18n System:** 
+  - Real-time language switching without page refresh.
+  - Text replacement logic optimized for performance.
 
-### 🌍 **New Language Support**
-- **Arabic Language Support (العربية):** Fully localized interface with Right-to-Left (RTL) layout support.
-- **Enhanced Chinese Translation:** The Chinese translation has been updated and refined using AI.
-  - ⚠️ **Disclaimer:** The Chinese translations were generated/modified by AI and may not be 100% accurate.
-  - 📝 **How to contribute:** All translation strings are located in `i18n.js`. If you find any errors, you can easily edit this file to correct or improve the Chinese translations.
-
-### 🛠 **UI & Functionality Improvements**
-- **Smart Image Preview:** Double-clicking an image now opens it in a **popup modal** directly within the page, instead of opening a new tab.
-- **Real-time Language Switching:** Changing the language updates the UI instantly (including the Settings page) without requiring a page refresh.
-- **Fixed Refresh Button:** The refresh button now correctly reloads the active tab to re-scan for new content.
-- **Privacy & About Pages:** Added fully translated "Privacy Policy" and "About" sections directly within the extension.
-- **Optimized Performance:** Improved text replacement logic to prevent translation conflicts and ensure persistent UI states.
+### 🛠 **UI & Functionality**
+- **Smart Preview:** Images now open in a modal popup within the page instead of a new tab.
+- **Privacy & About:** Native, translated pages integrated directly into the extension.
+- **Bug Fixes:** Resolved issues with the refresh button and text persistence.
 
 ---
 
-## 📄 Original Project Description
+## 📦 Installation
 
-**PickPic** is a powerful browser extension that helps you download images and videos from any webpage with just one click.
+Since this repository contains the **unpacked extension**, you can install it directly into Chrome/Edge without building it.
 
-### Supported Platforms
-- 微信公众号文章 (WeChat Official Accounts)
-- yaolifeng.com
-- 掘金 (Juejin)
-- 知乎 (Zhihu)
-- InfoQ
-- 简书 (Jianshu)
-- 阿里云 (Aliyun)
-- 腾讯云 (Tencent Cloud)
-- CSDN
-- 博客园 (Cnblogs)
-- 51CTO
-- 新浪微博 (Sina Weibo)
-- 豆瓣 (Douban)
-- 哔哩哔哩 (Bilibili)
-- 微博 (Weibo)
-- 思否 (SegmentFault)
-- 今日头条 (Toutiao)
-- **Other Web Pages (Universal Support)**
+1. **Download/Clone this repository:**
+   ```bash
+   git clone https://github.com/voidksa/PickPic.git
+   ```
+2. Open your browser (Chrome or Edge).
+3. Navigate to `chrome://extensions/`.
+4. Enable **Developer mode** (toggle switch in the top right corner).
+5. Click the **Load unpacked** button.
+6. Select the folder where you cloned/downloaded this repository (e.g., `PickPic`).
 
-### Key Features
-- **Universal Support:** Works on any webpage to extract images and videos.
-- **Enhanced WeChat Support:** Special features for WeChat Official Account articles.
-  - Article details view (title, author, description).
-  - Optimized content extraction from article body.
-  - Smart filtering of article images (excludes profile images, QR codes, etc.).
+✅ The extension is now installed and ready to use!
+
+---
+
+## ✨ Key Features
+
+- **Universal Support:** Extract images and videos from **any webpage**.
+- **WeChat Enhanced:** Specialized extraction for WeChat Official Account articles (Title, Author, Smart Filtering).
 - **Flexible Downloads:**
-  - Select and download individual items or all at once.
-  - Single image downloads directly.
-  - Multiple items automatically packaged as a ZIP archive.
-- **Media Support:** Supports both images and videos.
-- **Side Panel UI:** Easy access without disrupting your browsing.
-- **Responsive Design:** Optimized for different screen sizes.
+  - Single click download.
+  - Batch download (packaged as ZIP).
+- **Media Support:** Handles both Images and Videos.
+- **Privacy Focused:** No data collection; all processing happens locally.
 
-### Permissions Explained
-This extension requires the following permissions:
-- `activeTab`: To access the current webpage to extract images and videos.
-- `storage`: To save your preferences (language, settings).
-- `downloads`: To download images, videos, and ZIP files to your computer.
-- `sidePanel`: To display the extension interface in the browser side panel.
-- `<all_urls>`: To work on any website you visit (media is only extracted when you click the extension icon).
+## 🔒 Privacy & Permissions
 
-> **Privacy:** This extension does not collect, store, or transmit any personal data. All processing happens locally in your browser.
+- **activeTab:** To analyze the current page for media.
+- **storage:** To save your language and settings preferences.
+- **downloads:** To save files to your computer.
+- **<all_urls>:** To enable the extraction button on any site you visit.
 
-### Installation & Development
+> **Privacy Policy:** This extension does not collect, store, or transmit any personal data.
 
-#### From Source (Development)
-**Prerequisites:**
-- Node.js 16+ and pnpm installed
-- Git
+---
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/pickpic.git
-   cd pickpic
-   ```
+## 📝 Credits
 
-2. **Install dependencies:**
-   ```bash
-   pnpm install
-   ```
+- **Original Project:** [PickPic](https://github.com/yaolifeng0629/PickPic) by @yaolifeng0629
+- **Enhanced Version:** maintained by @voidksa
 
-3. **Start development server:**
-   ```bash
-   pnpm dev
-   ```
-
-4. **Load extension in Chrome:**
-   - Open `chrome://extensions/`
-   - Enable "Developer mode" (toggle in top right)
-   - Click "Load unpacked"
-   - Select the `build/chrome-mv3-dev` directory
-
-#### Production Build
-To create a production build for distribution:
-```bash
-pnpm build
-```
-The production bundle will be created in the `build/chrome-mv3-prod` directory.
-
-To package the extension into a ZIP file:
-```bash
-pnpm package
-```
-
-### Tech Stack
-- **Framework:** Plasmo
-- **UI Library:** React 18
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **State Management:** Zustand
-- **Internationalization:** i18next (Core logic enhanced in `i18n.js`)
-- **Archive Creation:** JSZip
-- **Build Tool:** pnpm
-
-### Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-### Author & Credits
-- **Original Author:** [Immerse](https://github.com/yaolifeng0629) (@yaolifeng0629)
-- **Modifications:** Added Arabic support, improved i18n system, and UI enhancements.
+**Disclaimer:** The Chinese translations in this version were enhanced using AI models. If you notice any inaccuracies, please feel free to contribute by editing `i18n.js`.
