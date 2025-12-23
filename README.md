@@ -1,6 +1,6 @@
 # PickPic - الإصدار المحسن (v1.1.0)
 
-[![Download PickPic Extension](https://img.shields.io/badge/Download-PickPic%20Extension%20(ZIP)-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](releases/PickPic-Extension-v1.1.0.zip)
+[![Download PickPic Extension](https://img.shields.io/badge/Download-PickPic%20Extension%20(ZIP)-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://github.com/voidksa/PickPic/releases)
 
 > [!NOTE]
 > 🇺🇸 **[English](README.en.md)** | 🇨🇳 **[中文 (Chinese)](README.zh.md)**
